@@ -99,7 +99,14 @@ export class CompanyFormComponent {
     this.isLoading.set(true);
     this.errorMessage.set(null);
 
-    this.companyService.createCompany(this.companyForm.value).subscribe({
+    const val = this.companyForm.value;
+    const payload: any = {
+      ...val,
+      website_url: val.websiteUrl,
+      career_page_url: val.careerPageUrl
+    };
+
+    this.companyService.createCompany(payload).subscribe({
       next: () => {
         this.isLoading.set(false);
         this.router.navigate(['/companies']);

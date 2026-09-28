@@ -30,12 +30,12 @@ import { CardComponent, CardContentComponent, CardHeaderComponent, CardTitleComp
       <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <div class="flex items-center gap-3">
-            <h1 class="text-2xl font-bold text-zinc-900 dark:text-zinc-50 tracking-tight">{{ app()?.jobTitle }}</h1>
+            <h1 class="text-2xl font-bold text-zinc-900 dark:text-zinc-50 tracking-tight">{{ app()?.job_title || app()?.jobTitle }}</h1>
             <app-status-badge [status]="app()!.status"></app-status-badge>
           </div>
           <p class="text-xs text-zinc-500 dark:text-zinc-400 mt-1">
-            Company: <span class="font-medium text-zinc-700 dark:text-zinc-300">{{ app()?.company?.name || app()?.companyName || (app()?.companyId ? 'ID: ' + app()?.companyId : 'N/A') }}</span>
-            <span *ngIf="app()?.jobLocation"> &bull; {{ app()?.jobLocation }}</span>
+            Company: <span class="font-medium text-zinc-700 dark:text-zinc-300">{{ app()?.company?.name || app()?.company_name || app()?.companyName || (app()?.company_id || app()?.companyId ? 'ID: ' + (app()?.company_id || app()?.companyId) : 'N/A') }}</span>
+            <span *ngIf="app()?.job_location || app()?.jobLocation"> &bull; {{ app()?.job_location || app()?.jobLocation }}</span>
           </p>
         </div>
 
@@ -60,7 +60,7 @@ import { CardComponent, CardContentComponent, CardHeaderComponent, CardTitleComp
             </ui-card-header>
             <ui-card-content customClass="p-4 sm:p-6">
               <div class="text-xs text-zinc-700 dark:text-zinc-300 whitespace-pre-wrap leading-relaxed overflow-y-auto font-sans">
-                {{ app()?.jobDescription || 'No description added.' }}
+                {{ app()?.job_description || app()?.jobDescription }}
               </div>
             </ui-card-content>
           </ui-card>
@@ -75,24 +75,27 @@ import { CardComponent, CardContentComponent, CardHeaderComponent, CardTitleComp
             <ui-card-content customClass="p-4 space-y-3 text-xs">
               <div>
                 <span class="font-medium text-zinc-500 block">Date Applied</span>
-                <span class="text-zinc-900 dark:text-zinc-50 font-medium">{{ app()?.dateApplied || 'Not specified' }}</span>
+                <span class="text-zinc-900 dark:text-zinc-50 font-medium">{{ app()?.date_applied || app()?.dateApplied || 'Not specified' }}</span>
               </div>
 
-              <div *ngIf="app()?.jobUrl">
+              <div *ngIf="app()?.job_url || app()?.jobUrl">
                 <span class="font-medium text-zinc-500 block">Job Link</span>
-                <a [href]="app()?.jobUrl" target="_blank" class="text-zinc-900 dark:text-zinc-50 underline truncate block">
-                  {{ app()?.jobUrl }}
+                <a [href]="app()?.job_url || app()?.jobUrl" target="_blank" class="text-zinc-900 dark:text-zinc-50 underline truncate block">
+                  {{ app()?.job_url || app()?.jobUrl }}
                 </a>
               </div>
 
               <div>
                 <span class="font-medium text-zinc-500 block">Referral Contact</span>
-                <span class="text-zinc-900 dark:text-zinc-50">{{ app()?.referralName || 'None' }} {{ app()?.referralContact ? '(' + app()?.referralContact + ')' : '' }}</span>
+                <span class="text-zinc-900 dark:text-zinc-50">
+                  {{ app()?.referral_name || app()?.referralName || 'None' }}
+                  {{ (app()?.referral_contact || app()?.referralContact) ? '(' + (app()?.referral_contact || app()?.referralContact) + ')' : '' }}
+                </span>
               </div>
 
               <div>
                 <span class="font-medium text-zinc-500 block">Source Channel</span>
-                <span class="text-zinc-900 dark:text-zinc-50">{{ app()?.sourceChannel || 'Direct Application' }}</span>
+                <span class="text-zinc-900 dark:text-zinc-50">{{ app()?.source_channel || app()?.sourceChannel || 'Direct Application' }}</span>
               </div>
             </ui-card-content>
           </ui-card>

@@ -114,16 +114,16 @@ import { CardComponent, CardContentComponent, CardDescriptionComponent, CardHead
               <tbody class="[&_tr:last-child]:border-0 divide-y divide-zinc-200 dark:divide-zinc-800">
                 <tr *ngFor="let app of recentApps()" class="transition-colors hover:bg-zinc-100/50 dark:hover:bg-zinc-800/50">
                   <td class="p-4 align-middle font-medium text-zinc-900 dark:text-zinc-50">
-                    <a [routerLink]="['/applications', app.id]" class="hover:underline">{{ app.jobTitle }}</a>
+                    <a [routerLink]="['/applications', app.id]" class="hover:underline">{{ app.job_title || app.jobTitle }}</a>
                   </td>
                   <td class="p-4 align-middle text-zinc-600 dark:text-zinc-400">
-                    {{ app.company?.name || app.companyName || 'N/A' }}
+                    {{ app.company?.name || app.company_name || app.companyName || 'N/A' }}
                   </td>
                   <td class="p-4 align-middle">
                     <app-status-badge [status]="app.status"></app-status-badge>
                   </td>
                   <td class="p-4 align-middle text-zinc-500">
-                    {{ app.dateApplied || '—' }}
+                    {{ app.date_applied || app.dateApplied || '—' }}
                   </td>
                   <td class="p-4 align-middle text-right">
                     <a [routerLink]="['/applications', app.id]">

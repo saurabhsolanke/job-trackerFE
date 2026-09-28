@@ -93,17 +93,17 @@ import { BadgeComponent } from '../../../shared/components/ui/badge.component';
                   </td>
                   <td class="p-4 align-middle">
                     <div class="flex items-center gap-2">
-                      <a *ngIf="company.websiteUrl" [href]="company.websiteUrl" target="_blank">
+                      <a *ngIf="company.website_url || company.websiteUrl" [href]="company.website_url || company.websiteUrl" target="_blank">
                         <ui-button variant="outline" size="sm" customClass="h-7 text-xs px-2.5">
                           🌐 Website
                         </ui-button>
                       </a>
-                      <a *ngIf="company.careerPageUrl" [href]="company.careerPageUrl" target="_blank">
+                      <a *ngIf="company.career_page_url || company.careerPageUrl" [href]="company.career_page_url || company.careerPageUrl" target="_blank">
                         <ui-button variant="secondary" size="sm" customClass="h-7 text-xs px-2.5">
                           💼 Careers
                         </ui-button>
                       </a>
-                      <span *ngIf="!company.websiteUrl && !company.careerPageUrl" class="text-zinc-500">—</span>
+                      <span *ngIf="!company.website_url && !company.websiteUrl && !company.career_page_url && !company.careerPageUrl" class="text-zinc-500">—</span>
                     </div>
                   </td>
                   <td class="p-4 align-middle text-zinc-400 max-w-md">
@@ -127,12 +127,12 @@ import { BadgeComponent } from '../../../shared/components/ui/badge.component';
           </ui-card-header>
           <ui-card-content customClass="p-4 space-y-3 text-xs">
             <div class="flex items-center gap-2 flex-wrap">
-              <a *ngIf="company.websiteUrl" [href]="company.websiteUrl" target="_blank">
+              <a *ngIf="company.website_url || company.websiteUrl" [href]="company.website_url || company.websiteUrl" target="_blank">
                 <ui-button variant="outline" size="sm" customClass="h-7 text-xs px-2.5">
                   🌐 Website
                 </ui-button>
               </a>
-              <a *ngIf="company.careerPageUrl" [href]="company.careerPageUrl" target="_blank">
+              <a *ngIf="company.career_page_url || company.careerPageUrl" [href]="company.career_page_url || company.careerPageUrl" target="_blank">
                 <ui-button variant="secondary" size="sm" customClass="h-7 text-xs px-2.5">
                   💼 Careers
                 </ui-button>

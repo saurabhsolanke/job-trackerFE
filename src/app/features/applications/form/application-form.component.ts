@@ -213,8 +213,20 @@ export class ApplicationFormComponent implements OnInit {
   loadApplication(id: number): void {
     this.isLoading.set(true);
     this.appService.getApplicationById(id).subscribe({
-      next: (app) => {
-        this.appForm.patchValue(app);
+      next: (app: any) => {
+        this.appForm.patchValue({
+          companyId: app.company_id ?? app.companyId,
+          jobTitle: app.job_title ?? app.jobTitle,
+          status: app.status,
+          jobLocation: app.job_location ?? app.jobLocation,
+          jobUrl: app.job_url ?? app.jobUrl,
+          dateApplied: app.date_applied ?? app.dateApplied,
+          referralName: app.referral_name ?? app.referralName,
+          referralContact: app.referral_contact ?? app.referralContact,
+          sourceChannel: app.source_channel ?? app.sourceChannel,
+          sourceUrl: app.source_url ?? app.sourceUrl,
+          jobDescription: app.job_description ?? app.jobDescription
+        });
         this.isLoading.set(false);
       },
       error: () => this.isLoading.set(false)
@@ -226,14 +238,27 @@ export class ApplicationFormComponent implements OnInit {
 
     this.isLoading.set(true);
     const formVal = this.appForm.value;
+    const payload: any = {
+      ...formVal,
+      company_id: formVal.companyId,
+      job_title: formVal.jobTitle,
+      job_location: formVal.jobLocation,
+      job_url: formVal.jobUrl,
+      date_applied: formVal.dateApplied,
+      referral_name: formVal.referralName,
+      referral_contact: formVal.referralContact,
+      source_channel: formVal.sourceChannel,
+      source_url: formVal.sourceUrl,
+      job_description: formVal.jobDescription
+    };
 
     if (this.isEditMode() && this.appId()) {
-      this.appService.updateApplication(this.appId()!, formVal).subscribe({
+      this.appService.updateApplication(this.appId()!, payload).subscribe({
         next: () => this.router.navigate(['/applications', this.appId()]),
         error: () => this.isLoading.set(false)
       });
     } else {
-      this.appService.createApplication(formVal).subscribe({
+      this.appService.createApplication(payload).subscribe({
         next: (created) => this.router.navigate(['/applications', created.id || '']),
         error: () => this.isLoading.set(false)
       });
