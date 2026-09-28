@@ -3,10 +3,11 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Company } from '../models/company.model';
 import { PageResponse } from '../models/application.model';
+import { environment } from '../../../environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class CompanyService {
-  private readonly API_URL = 'http://localhost:8080/api/companies';
+  private readonly API_URL = `${environment.apiUrl}/companies`;
 
   constructor(private http: HttpClient) {}
 
