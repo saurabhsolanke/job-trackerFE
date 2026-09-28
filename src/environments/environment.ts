@@ -1,4 +1,4 @@
 export const environment = {
   production: false,
-  apiUrl: 'https://job-trackerbe.railway.internal/api'
+  apiUrl: 'http://localhost:8080/api'
 };

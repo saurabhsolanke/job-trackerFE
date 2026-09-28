@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://job-trackerbe.railway.internal/api'
+  apiUrl: 'https://expressjob-tracker-production.up.railway.app/api'
 };
